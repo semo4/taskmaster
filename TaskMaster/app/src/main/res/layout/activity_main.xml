@@ -1,54 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/my_task"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Tasks"
-
-        android:textColor="@color/black"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="50dp"
-        android:textSize="25dp"
-        android:textStyle="bold"
-         />
-    <ImageView
-        android:id="@+id/image"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/my_task"
-        android:layout_margin="15dp"
-        android:src="@drawable/empty"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/image">
-        <Button
-            android:id="@+id/add_task"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/my_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
-            android:padding="10dp"
-            android:background="@drawable/button"
-            android:text="Add Task"/>
-        <Button
-            android:id="@+id/all_task"
+            android:text="My Tasks"
+
+            android:textColor="@color/black"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="50dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            />
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_task"
+            android:layout_margin="15dp"
+            android:src="@drawable/empty"/>
+
+        <LinearLayout
+            android:id="@+id/button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image">
+            <Button
+                android:id="@+id/add_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:padding="10dp"
+                android:background="@drawable/button"
+                android:text="Add Task"/>
+            <Button
+                android:id="@+id/all_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="120dp"
+                android:background="@drawable/button"
+                android:padding="10dp"
+                android:text="All Task"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="120dp"
+            android:text="User Name"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/button_layout"
+            />
+
+        <LinearLayout
+            android:id="@+id/detail_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/username">
+            <Button
+                android:id="@+id/titleOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:padding="10dp"
+                android:background="@drawable/button"
+                android:text="Task One"/>
+            <Button
+                android:id="@+id/titleTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:padding="10dp"
+                android:layout_marginLeft="30dp"
+                android:text="Task Two"/>
+            <Button
+                android:id="@+id/titleThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/button"
+                android:padding="10dp"
+                android:text="Task Three"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_below="@+id/detail_button"
             android:background="@drawable/button"
             android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="100dp"
+            android:text="Setting"/>
+    </RelativeLayout>
 
-            android:text="All Task"/>
 
-
-    </LinearLayout>
-
-</RelativeLayout>
+</ScrollView>
