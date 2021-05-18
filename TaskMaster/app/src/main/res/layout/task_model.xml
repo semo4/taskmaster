@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="@color/orange"
+    app:cardUseCompatPadding="true"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/task" />
+        <TextView
+            android:id="@+id/modelTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:paddingTop="20px"
+            android:paddingBottom="20px"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:layout_marginStart="25dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:id="@+id/modelBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Body"
+            android:layout_marginStart="25dp"
+            android:paddingTop="50px"
+            android:paddingBottom="20px"
+            android:layout_below="@+id/modelState"
+            android:gravity="center"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:id="@+id/modelState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="State"
+            android:paddingTop="20px"
+            android:layout_marginStart="25dp"
+            android:paddingBottom="20px"
+            android:gravity="center"
+            android:layout_below="@+id/modelTitle"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="25dp"
+
+            />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

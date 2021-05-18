@@ -1,6 +1,8 @@
 package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,11 +12,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     Button btn_add_task, btn_all_task, btn_task_one, btn_task_two,btn_task_three, btn_setting;
     TextView username;
     SharedPreferences sharedPreferences;
+
+    RecyclerView recyclerView;
+    Adapter adapter;
+    ArrayList<Task> taskList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +36,42 @@ public class MainActivity extends AppCompatActivity {
         btn_task_three= findViewById(R.id.titleThree);
         btn_setting= findViewById(R.id.setting);
         username= findViewById(R.id.username);
+        recyclerView= findViewById(R.id.recycler_view);
+        taskList = new ArrayList<>(); //set it's properties
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));//linear layout
 
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String name = sharedPreferences.getString("NAME", "User");
         username.setText(name + "\'s Tasks");
+        String text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
+                "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
+                " when an unknown printer took a galley of type and scrambled it to make a type specimen book. ";
+        Task t = new Task();
+        t.setTitle("Task One");
+        t.setBody(text);
+        t.setState("new");
+        taskList.add(t);
+        t = new Task();
+        t.setTitle("Task Two");
+        t.setBody(text);
+        t.setState("assigned");
+        taskList.add(t);
+        t = new Task();
+        t.setTitle("Task Three");
+        t.setBody(text);
+        t.setState("in progress");
+        taskList.add(t);
+        t = new Task();
+        t.setTitle("Task Four");
+        t.setBody(text);
+        t.setState("complete");
+        taskList.add(t);
+
+        adapter = new Adapter(MainActivity.this,taskList);
+        recyclerView.setAdapter(adapter);
+
 
 
         btn_add_task.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, TaskDetail.class);
                 i.putExtra("title", "Task One Detail");
+                i.putExtra("body", text);
                 startActivity(i);
             }
         });
@@ -63,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, TaskDetail.class);
                 i.putExtra("title", "Task Two Detail");
+                i.putExtra("body", text);
                 startActivity(i);
             }
         });
@@ -71,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, TaskDetail.class);
                 i.putExtra("title", "Task Three Detail");
+                i.putExtra("body", text);
                 startActivity(i);
             }
         });
