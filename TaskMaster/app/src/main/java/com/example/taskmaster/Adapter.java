@@ -12,13 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Holder>{
 
     Context c ;
-    ArrayList<Task> models;
+    List<Task> models;
 
-    public Adapter(Context c, ArrayList<Task> models) {
+    public Adapter(Context c, List<Task> models) {
         this.c = c;
         this.models = models;
     }
