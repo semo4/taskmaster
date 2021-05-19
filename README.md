@@ -5,12 +5,18 @@
 - there is more three button that connect with detail page that display task information when click the button
 - and there is button that connect with setting page.
 
-![image description](screenshots/home1.png)
+- for the task that display in RecyclerView we will get it from Room (it is like local database we store task is it )
+not in static way so we will deal with dynamic list of data
+
+
+![image description](screenshots/newHome.png)
 
 ## Add a Task
 - On the “Add a Task” page, allow users to type in details about a new task, specifically a title and a body. When users click the “submit” button, show a “submitted!” label on the page.
 
-![image description](screenshots/addt.png)
+- here I modify to store the data the user enter and store it in database and then display it home page 
+
+![image description](screenshots/newAddTask.png)
 
 ## All Tasks
 - The all tasks page should just be an image with a back button; it needs no functionality.

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TaskMaster</string>
+
+    <string-array name="stateValue">
+        <item>Select State</item>
+        <item>New</item>
+        <item>Assigned</item>
+        <item>In progress</item>
+        <item>Completed</item>
+    </string-array>
 </resources>

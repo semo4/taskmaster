@@ -25,7 +25,8 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/add_task_tv"
         android:orientation="vertical"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/title"
@@ -47,7 +48,8 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/layout1"
         android:orientation="vertical"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/desc"
@@ -63,6 +65,33 @@
             android:layout_height="wrap_content"
             android:hint="Do Something"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout3"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/layout2"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Task State"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            />
+        <Spinner
+            android:id="@+id/task_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:entries="@array/stateValue"
+
+            android:hint="Do Something"/>
+    </LinearLayout>
     <Button
         android:id="@+id/add_task"
         android:layout_width="wrap_content"
@@ -70,7 +99,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="50dp"
         android:padding="10dp"
-        android:layout_below="@+id/layout2"
+        android:layout_below="@+id/layout3"
         android:background="@drawable/button"
         android:text="Add Task"/>
 
