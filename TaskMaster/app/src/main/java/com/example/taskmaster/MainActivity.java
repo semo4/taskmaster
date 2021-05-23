@@ -17,6 +17,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 import static com.example.taskmaster.AppDatabase.databaseWriteExecutor;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Adapter adapter;
 //    ArrayList<Task> taskList;
-    AppDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         btn_task_two= findViewById(R.id.titleTwo);
         btn_task_three= findViewById(R.id.titleThree);
         btn_setting= findViewById(R.id.setting);
-        username= findViewById(R.id.username);
+        username= findViewById(R.id.usernamemain);
         recyclerView= findViewById(R.id.recycler_view);
 //        taskList = new ArrayList<>(); //set it's properties
 
@@ -51,46 +53,13 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String name = sharedPreferences.getString("NAME", "User");
-        username.setText(name + "\'s Tasks");
+        username.setText(name + "'s Tasks");
         String text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
                 "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
                 " when an unknown printer took a galley of type and scrambled it to make a type specimen book. ";
 
-        Toast.makeText(this,"in main activity", Toast.LENGTH_SHORT ).show();
 
-//        Task t = new Task();
-//        t.setTitle("Task One");
-//        t.setBody(text);
-//        t.setState("new");
-//        taskList.add(t);
-//        t = new Task();
-//        t.setTitle("Task Two");
-//        t.setBody(text);
-//        t.setState("assigned");
-//        taskList.add(t);
-//        t = new Task();
-//        t.setTitle("Task Three");
-//        t.setBody(text);
-//        t.setState("in progress");
-//        taskList.add(t);
-//        t = new Task();
-//        t.setTitle("Task Four");
-//        t.setBody(text);
-//        t.setState("complete");
-//        taskList.add(t);
-//        t = new Task();
-//        t.setTitle("Task Four");
-//        t.setBody(text);
-//        t.setState("complete");
-//        taskList.add(t);
-//        t = new Task();
-//        t.setTitle("Task Three");
-//        t.setBody(text);
-//        t.setState("in progress");
-//        taskList.add(t);
-
-
-//        List<Task> taskList =AppDatabase.getDatabase(getApplicationContext()).taskDao().getAll();
+        Toasty.info(this, "Welcome in Main activity", Toast.LENGTH_SHORT,true).show();
 
         databaseWriteExecutor.execute(new Runnable() {
             @Override

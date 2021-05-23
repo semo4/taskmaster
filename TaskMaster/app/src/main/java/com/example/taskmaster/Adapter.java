@@ -47,6 +47,7 @@ public class Adapter extends RecyclerView.Adapter<Holder>{
             @Override
             public void onItemClick(View v, int pos) {
                 //get data from item clicked
+                int id = models.get(pos).getId();
                 String title = models.get(pos).getTitle();
                 String body = models.get(pos).getBody();
                 String state = models.get(pos).getState();
@@ -54,6 +55,7 @@ public class Adapter extends RecyclerView.Adapter<Holder>{
 
 
                 Intent intent = new Intent(c , TaskDetail.class);
+                intent.putExtra("id", id);
                 intent.putExtra("title", title);
                 intent.putExtra("body", body);
                 intent.putExtra("state", state);

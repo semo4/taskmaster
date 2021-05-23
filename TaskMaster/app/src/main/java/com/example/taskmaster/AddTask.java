@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 import static com.example.taskmaster.AppDatabase.databaseWriteExecutor;
 
 public class AddTask extends AppCompatActivity {
@@ -27,7 +29,9 @@ public class AddTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Toasty.info(this, "Welcome in AddTask activity", Toast.LENGTH_SHORT,true).show();
 
         task_title= findViewById(R.id.task_title);
         task_desc= findViewById(R.id.task_desc);
@@ -76,6 +80,7 @@ public class AddTask extends AppCompatActivity {
 
 
                 if( title_check&& desc_check && state_check){
+
                     databaseWriteExecutor.execute(new Runnable() {
                         @Override
                         public void run() {
@@ -83,11 +88,12 @@ public class AddTask extends AppCompatActivity {
                             t.setTitle(title);
                             t.setBody(desc);
                             t.setState(state);
+
                             AppDatabase.getDatabase(getApplicationContext()).taskDao().insertAll(t);
                         }
                     });
+                    Toasty.success(AddTask.this, "Add Task Successfully", Toast.LENGTH_SHORT,true).show();
                     Intent intent = new Intent(AddTask.this, MainActivity.class);
-                    Toast.makeText(AddTask.this, "Add Task Successfully", Toast.LENGTH_SHORT).show();
                     startActivity(intent);
 
                 }
@@ -98,5 +104,11 @@ public class AddTask extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
