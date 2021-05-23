@@ -17,7 +17,7 @@
             android:text="My Tasks"
 
             android:textColor="@color/black"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="50dp"
             android:textSize="25dp"
             android:textStyle="bold"
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_below="@+id/my_task"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_height="300dp">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:background="@drawable/button"
                 android:text="Add Task"/>
             <Button
@@ -56,17 +56,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="120dp"
                 android:background="@drawable/button"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:text="All Task"/>
         </LinearLayout>
 
         <TextView
-            android:id="@+id/username"
+            android:id="@+id/usernamemain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User Name"
             android:textColor="@color/black"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="50dp"
             android:textSize="25dp"
             android:textStyle="bold"
@@ -78,8 +78,8 @@
             android:id="@+id/detail_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/username">
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/usernamemain">
             <Button
                 android:id="@+id/titleOne"
                 android:layout_width="wrap_content"
@@ -114,7 +114,7 @@
             android:layout_below="@+id/detail_button"
             android:background="@drawable/button"
             android:padding="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="100dp"
             android:text="Setting"/>
     </RelativeLayout>

@@ -32,3 +32,10 @@ not in static way so we will deal with dynamic list of data
 -  a Settings page. It  allow users to enter their username and hit save.
 
 ![image description](screenshots/setting.png)
+
+
+## Espresso testing 
+- I do the ui testing form main activity , setting activity and detailsTask activity
+- in main activity I tested if all component is display and check the text view if it has the same text.
+- setting activity i check if the input text is display same in the main activity after I get back to it 
+- detailsTask activity i choose one of the item in the recyclerView and check if it display correctly in the details activity

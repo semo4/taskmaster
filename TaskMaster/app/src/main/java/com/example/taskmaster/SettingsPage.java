@@ -10,8 +10,11 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.HashMap;
+
+import es.dmoral.toasty.Toasty;
 
 public class SettingsPage extends AppCompatActivity {
 
@@ -28,6 +31,10 @@ public class SettingsPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_page);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Toasty.info(this, "Welcome in SettingsPage activity", Toast.LENGTH_SHORT,true).show();
 
         username= findViewById(R.id.username);
         btn_save= findViewById(R.id.save_name);
@@ -58,5 +65,10 @@ public class SettingsPage extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

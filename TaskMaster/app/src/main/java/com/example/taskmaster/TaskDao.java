@@ -19,7 +19,7 @@ public interface TaskDao {
     List<Task> loadAllByIds(int[] taskIds);
 
     @Query("SELECT * FROM tasks WHERE title LIKE :title LIMIT 1")
-    Task findByName(String title);
+    Task findByTitle(String title);
 
     @Insert
     void insertAll(Task... tasks);
@@ -29,4 +29,9 @@ public interface TaskDao {
 
     @Query("DELETE FROM tasks")
     void deleteAll();
+
+    @Query("DELETE FROM tasks WHERE id = :Id")
+     void deleteByTaskId(int Id);
+
+
 }
