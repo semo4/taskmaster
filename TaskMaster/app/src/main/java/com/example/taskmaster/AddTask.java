@@ -1,16 +1,21 @@
 package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
+import com.amplifyframework.datastore.generated.model.Task;
 
 import java.util.List;
 
@@ -28,7 +33,14 @@ public class AddTask extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+        try {
+            Amplify.addPlugin(new AWSDataStorePlugin());
+            Amplify.configure(getApplicationContext());
 
+            Log.i("Tutorial", "Initialized Amplify");
+        } catch (AmplifyException e) {
+            Log.e("Tutorial", "Could not initialize Amplify", e);
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Toasty.info(this, "Welcome in AddTask activity", Toast.LENGTH_SHORT,true).show();
@@ -42,7 +54,7 @@ public class AddTask extends AppCompatActivity {
         databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                List<Task> taskList = AppDatabase.getDatabase(getApplicationContext()).taskDao().getAll();
+                List<Tasks> taskList = AppDatabase.getDatabase(getApplicationContext()).taskDao().getAll();
                 total.setText("Total Tasks: "+ taskList.size());
             }
         });
@@ -81,17 +93,27 @@ public class AddTask extends AppCompatActivity {
 
                 if( title_check&& desc_check && state_check){
 
-                    databaseWriteExecutor.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            Task t = new Task();
-                            t.setTitle(title);
-                            t.setBody(desc);
-                            t.setState(state);
+                    Task item = Task.builder()
+                            .title(title)
+                            .body(desc)
+                            .state(state)
+                            .build();
+                    Amplify.DataStore.save(item,
+                            success -> Log.i("Tutorial", "Saved item: " + success.item().getTitle()),
+                            error -> Log.e("Tutorial", "Could not save item to DataStore", error)
+                    );
 
-                            AppDatabase.getDatabase(getApplicationContext()).taskDao().insertAll(t);
-                        }
-                    });
+//                    databaseWriteExecutor.execute(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Tasks t = new Tasks();
+//                            t.setTitle(title);
+//                            t.setBody(desc);
+//                            t.setState(state);
+//
+//                            AppDatabase.getDatabase(getApplicationContext()).taskDao().insertAll(t);
+//                        }
+//                    });
                     Toasty.success(AddTask.this, "Add Task Successfully", Toast.LENGTH_SHORT,true).show();
                     Intent intent = new Intent(AddTask.this, MainActivity.class);
                     startActivity(intent);

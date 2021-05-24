@@ -11,15 +11,14 @@ import android.view.animation.AnimationUtils;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Holder>{
 
     Context c ;
-    List<Task> models;
+    List<Tasks> models;
 
-    public Adapter(Context c, List<Task> models) {
+    public Adapter(Context c, List<Tasks> models) {
         this.c = c;
         this.models = models;
     }

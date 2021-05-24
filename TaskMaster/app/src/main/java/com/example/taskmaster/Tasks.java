@@ -8,7 +8,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tasks")
-public class Task {
+public class Tasks {
     @PrimaryKey(autoGenerate = true)
      int id;
     @ColumnInfo(name = "title")
