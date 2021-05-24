@@ -39,3 +39,7 @@ not in static way so we will deal with dynamic list of data
 - in main activity I tested if all component is display and check the text view if it has the same text.
 - setting activity i check if the input text is display same in the main activity after I get back to it 
 - detailsTask activity i choose one of the item in the recyclerView and check if it display correctly in the details activity
+
+## Amplify
+-  using AWS Amplify. We’ll work with Amplify to add more cloud functionality for the App.
+- this will make store and retreive data from dataSotre using amplify.

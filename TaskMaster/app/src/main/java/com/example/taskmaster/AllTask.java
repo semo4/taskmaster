@@ -38,7 +38,7 @@ public class AllTask extends AppCompatActivity {
         databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                List<Task> taskList = AppDatabase.getDatabase(getApplicationContext()).taskDao().getAll();
+                List<Tasks> taskList = AppDatabase.getDatabase(getApplicationContext()).taskDao().getAll();
                 adapter = new Adapter(AllTask.this,taskList);
                 recyclerView.setAdapter(adapter);
 
