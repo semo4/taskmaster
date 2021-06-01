@@ -43,3 +43,6 @@ not in static way so we will deal with dynamic list of data
 ## Amplify
 -  using AWS Amplify. We’ll work with Amplify to add more cloud functionality for the App.
 - this will make store and retreive data from dataSotre using amplify.
+
+## AWS
+- connect app with aws amplify to make sign up and sign in page and to ensure the user can confirm his account after he create it 

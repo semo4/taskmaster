@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskMaster">
+        <activity android:name=".Login"></activity>
+        <activity android:name=".CheckOtp" />
+        <activity android:name=".SignUp" />
         <activity android:name=".SettingsPage" />
         <activity android:name=".TaskDetail" />
         <activity android:name=".AllTask" />
