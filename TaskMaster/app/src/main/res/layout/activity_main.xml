@@ -75,16 +75,53 @@
             />
 
         <LinearLayout
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/usernamemain">
+            <Button
+                android:id="@+id/signup_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button"
+                android:padding="5dp"
+                android:layout_margin="20dp"
+                android:text="Sign Up Page"/>
+            <Button
+                android:id="@+id/login_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button"
+                android:padding="5dp"
+                android:layout_margin="20dp"
+                android:text="Sign in Page"/>
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button"
+                android:padding="5dp"
+                android:layout_margin="20dp"
+                android:text="Logout"/>
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/detail_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_below="@+id/usernamemain">
+            android:layout_below="@+id/login_button">
             <Button
                 android:id="@+id/titleOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="20dp"
                 android:padding="10dp"
                 android:background="@drawable/button"
                 android:text="Task One"/>

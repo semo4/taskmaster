@@ -15,8 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amplifyframework.AmplifyException;
+;
+import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.auth.options.AuthSignOutOptions;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.AWSDataStorePlugin;
+
 import com.amplifyframework.datastore.generated.model.Task;
 
 import java.util.ArrayList;
@@ -28,7 +33,7 @@ import static com.example.taskmaster.AppDatabase.databaseWriteExecutor;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn_add_task, btn_all_task, btn_task_one, btn_task_two,btn_task_three, btn_setting;
+    Button btn_add_task, btn_all_task, btn_task_one, btn_task_two,btn_task_three, btn_setting, signup,signin, logout;
     TextView username;
     SharedPreferences sharedPreferences;
 
@@ -43,13 +48,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try {
-            Amplify.addPlugin(new AWSDataStorePlugin());
+            // Add this line, to include the Auth plugin.
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
-
-            Log.i("Tutorial", "Initialized Amplify");
-        } catch (AmplifyException e) {
-            Log.e("Tutorial", "Could not initialize Amplify", e);
+            Log.i("MyAmplifyApp", "Initialized Amplify");
+        } catch (AmplifyException error) {
+            Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
+
+
+
+
 
 
         btn_add_task= findViewById(R.id.add_task);
@@ -60,14 +69,58 @@ public class MainActivity extends AppCompatActivity {
         btn_setting= findViewById(R.id.setting);
         username= findViewById(R.id.usernamemain);
         recyclerView= findViewById(R.id.recycler_view);
-//        taskList = new ArrayList<>(); //set it's properties
+        signup= findViewById(R.id.signup_page);
+        signin= findViewById(R.id.login_page);
+        logout= findViewById(R.id.logout);
+
+        Intent i = getIntent();
+        String str_username = i.getStringExtra("username");
+
+        if(str_username != null){
+            signup.setVisibility(View.GONE);
+            signin.setVisibility(View.GONE);
+        }else{
+            signup.setVisibility(View.VISIBLE);
+            signin.setVisibility(View.VISIBLE);
+            logout.setVisibility(View.GONE);
+        }
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, SignUp.class);
+                startActivity(i);
+            }
+        });
+
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, Login.class);
+                startActivity(i);
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Amplify.Auth.signOut(
+                        AuthSignOutOptions.builder().globalSignOut(true).build(),
+                        () -> Log.i("AuthQuickstart", "Signed out globally"),
+                        error -> Log.e("AuthQuickstart", error.toString())
+                );
+                Intent i = new Intent(MainActivity.this, Login.class);
+                startActivity(i);
+            }
+        });
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));//linear layout
 
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String name = sharedPreferences.getString("NAME", "User");
-        username.setText(name + "'s Tasks");
+        username.setText(str_username + "'s Tasks");
         String text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
                 "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
                 " when an unknown printer took a galley of type and scrambled it to make a type specimen book. ";
@@ -85,29 +138,29 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        Amplify.DataStore.query(Task.class,
-                todos -> {
-
-                    List<Tasks> taskList = new ArrayList<>();
-                    while (todos.hasNext()) {
-                        Task todo = todos.next();
-                        Tasks t = new Tasks();
-                        Log.i("Tutorial", "==== Todo ====");
-                        Log.i("Tutorial", "Name: " + todo.getTitle());
-                        Log.i("Tutorial", "Name: " + todo.getBody());
-                        Log.i("Tutorial", "Name: " + todo.getState());
-                        t.setTitle(todo.getTitle());
-                        t.setBody(todo.getBody());
-                        t.setState(todo.getState());
-                        taskList.add(t);
-                        adapter = new Adapter(MainActivity.this,taskList);
-
-
-                    }
-                    recyclerView.setAdapter(adapter);
-                },
-                failure -> Log.e("Tutorial", "Could not query DataStore", failure)
-        );
+//        Amplify.DataStore.query(Task.class,
+//                todos -> {
+//
+//                    List<Tasks> taskList = new ArrayList<>();
+//                    while (todos.hasNext()) {
+//                        Task todo = todos.next();
+//                        Tasks t = new Tasks();
+//                        Log.i("Tutorial", "==== Todo ====");
+//                        Log.i("Tutorial", "Name: " + todo.getTitle());
+//                        Log.i("Tutorial", "Name: " + todo.getBody());
+//                        Log.i("Tutorial", "Name: " + todo.getState());
+//                        t.setTitle(todo.getTitle());
+//                        t.setBody(todo.getBody());
+//                        t.setState(todo.getState());
+//                        taskList.add(t);
+//                        adapter = new Adapter(MainActivity.this,taskList);
+//
+//
+//                    }
+//                    recyclerView.setAdapter(adapter);
+//                },
+//                failure -> Log.e("Tutorial", "Could not query DataStore", failure)
+//        );
 
 
 
