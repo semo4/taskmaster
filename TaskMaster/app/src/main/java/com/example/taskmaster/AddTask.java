@@ -56,7 +56,7 @@ public class AddTask extends AppCompatActivity {
 
         try {
             // Add these lines to add the AWSCognitoAuthPlugin and AWSS3StoragePlugin plugins
-            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+//            Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
 

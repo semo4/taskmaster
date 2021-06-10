@@ -20,7 +20,7 @@ public class Holder extends RecyclerView.ViewHolder implements View.OnClickListe
         title = itemView.findViewById(R.id.modelTitle);
         body = itemView.findViewById(R.id.modelBody);
         state = itemView.findViewById(R.id.modelState);
-        image = itemView.findViewById(R.id.image);
+        image = itemView.findViewById(R.id.modelImage);
 
         itemView.setOnClickListener(this);
     }
