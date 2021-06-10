@@ -22,7 +22,9 @@ import com.amplifyframework.auth.options.AuthSignOutOptions;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 
+import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,13 +50,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try {
-            // Add this line, to include the Auth plugin.
+            // Add these lines to add the AWSCognitoAuthPlugin and AWSS3StoragePlugin plugins
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
+            Amplify.addPlugin(new AWSDataStorePlugin());
             Amplify.configure(getApplicationContext());
+
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
+
+
+
+
 
 
 
@@ -138,29 +147,31 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-//        Amplify.DataStore.query(Task.class,
-//                todos -> {
-//
-//                    List<Tasks> taskList = new ArrayList<>();
-//                    while (todos.hasNext()) {
-//                        Task todo = todos.next();
-//                        Tasks t = new Tasks();
-//                        Log.i("Tutorial", "==== Todo ====");
-//                        Log.i("Tutorial", "Name: " + todo.getTitle());
-//                        Log.i("Tutorial", "Name: " + todo.getBody());
-//                        Log.i("Tutorial", "Name: " + todo.getState());
-//                        t.setTitle(todo.getTitle());
-//                        t.setBody(todo.getBody());
-//                        t.setState(todo.getState());
-//                        taskList.add(t);
-//                        adapter = new Adapter(MainActivity.this,taskList);
-//
-//
-//                    }
-//                    recyclerView.setAdapter(adapter);
-//                },
-//                failure -> Log.e("Tutorial", "Could not query DataStore", failure)
-//        );
+        Amplify.DataStore.query(Task.class,
+                todos -> {
+
+                    List<Tasks> taskList = new ArrayList<>();
+                    while (todos.hasNext()) {
+                        Task todo = todos.next();
+                        Tasks t = new Tasks();
+                        Log.i("Tutorial", "==== Todo ====");
+                        Log.i("Tutorial", "Name: " + todo.getTitle());
+                        Log.i("Tutorial", "Name: " + todo.getBody());
+                        Log.i("Tutorial", "Name: " + todo.getState());
+
+                        t.setTitle(todo.getTitle());
+                        t.setBody(todo.getBody());
+                        t.setState(todo.getState());
+
+                        taskList.add(t);
+                        adapter = new Adapter(MainActivity.this,taskList);
+
+
+                    }
+                    recyclerView.setAdapter(adapter);
+                },
+                failure -> Log.e("Tutorial", "Could not query DataStore", failure)
+        );
 
 
 
@@ -222,4 +233,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }

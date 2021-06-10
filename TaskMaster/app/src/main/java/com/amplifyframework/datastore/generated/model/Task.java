@@ -23,10 +23,12 @@ public final class Task implements Model {
   public static final QueryField TITLE = field("Task", "title");
   public static final QueryField BODY = field("Task", "body");
   public static final QueryField STATE = field("Task", "state");
+  public static final QueryField IMAGE = field("Task", "image");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String title;
   private final @ModelField(targetType="String", isRequired = true) String body;
   private final @ModelField(targetType="String", isRequired = true) String state;
+  private final @ModelField(targetType="String", isRequired = true) String image;
   public String getId() {
       return id;
   }
@@ -42,12 +44,16 @@ public final class Task implements Model {
   public String getState() {
       return state;
   }
-  
-  private Task(String id, String title, String body, String state) {
+  public String getImage() {
+      return image;
+  }
+
+  private Task(String id, String title, String body, String state, String image) {
     this.id = id;
     this.title = title;
     this.body = body;
     this.state = state;
+    this.image = image;
   }
   
   @Override
@@ -61,7 +67,8 @@ public final class Task implements Model {
       return ObjectsCompat.equals(getId(), task.getId()) &&
               ObjectsCompat.equals(getTitle(), task.getTitle()) &&
               ObjectsCompat.equals(getBody(), task.getBody()) &&
-              ObjectsCompat.equals(getState(), task.getState());
+              ObjectsCompat.equals(getState(), task.getState()) &&
+              ObjectsCompat.equals(getImage(), task.getImage());
       }
   }
   
@@ -72,6 +79,7 @@ public final class Task implements Model {
       .append(getTitle())
       .append(getBody())
       .append(getState())
+      .append(getImage())
       .toString()
       .hashCode();
   }
@@ -84,6 +92,7 @@ public final class Task implements Model {
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
       .append("state=" + String.valueOf(getState()))
+      .append("image=" + String.valueOf(getImage()))
       .append("}")
       .toString();
   }
@@ -115,7 +124,8 @@ public final class Task implements Model {
       id,
       null,
       null,
-      null
+      null,
+     null
     );
   }
   
@@ -123,7 +133,8 @@ public final class Task implements Model {
     return new CopyOfBuilder(id,
       title,
       body,
-      state);
+      state,
+        image);
   }
   public interface TitleStep {
     BodyStep title(String title);
@@ -136,9 +147,11 @@ public final class Task implements Model {
   
 
   public interface StateStep {
-    BuildStep state(String state);
+      ImageStep state(String state);
   }
-  
+    public interface ImageStep {
+      BuildStep image(String image);
+    }
 
   public interface BuildStep {
     Task build();
@@ -146,11 +159,12 @@ public final class Task implements Model {
   }
   
 
-  public static class Builder implements TitleStep, BodyStep, StateStep, BuildStep {
+  public static class Builder implements TitleStep, BodyStep, StateStep, ImageStep,BuildStep {
     private String id;
     private String title;
     private String body;
     private String state;
+    private String image;
     @Override
      public Task build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -159,7 +173,8 @@ public final class Task implements Model {
           id,
           title,
           body,
-          state);
+          state,
+            image);
     }
     
     @Override
@@ -175,15 +190,23 @@ public final class Task implements Model {
         this.body = body;
         return this;
     }
-    
-    @Override
-     public BuildStep state(String state) {
-        Objects.requireNonNull(state);
-        this.state = state;
-        return this;
-    }
-    
-    /** 
+
+      @Override
+      public ImageStep state(String state) {
+          Objects.requireNonNull(state);
+          this.state = state;
+          return this;
+      }
+
+      @Override
+      public BuildStep image(String image) {
+          Objects.requireNonNull(image);
+          this.image = image;
+          return this;
+      }
+
+
+      /**
      * WARNING: Do not set ID when creating a new object. Leave this blank and one will be auto generated for you.
      * This should only be set when referring to an already existing object.
      * @param id id
@@ -206,13 +229,14 @@ public final class Task implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String title, String body, String state) {
+    private CopyOfBuilder(String id, String title, String body, String state, String image) {
       super.id(id);
       super.title(title)
         .body(body)
-        .state(state);
+        .state(state)
+      .image(image);
     }
-    
+
     @Override
      public CopyOfBuilder title(String title) {
       return (CopyOfBuilder) super.title(title);
@@ -227,6 +251,11 @@ public final class Task implements Model {
      public CopyOfBuilder state(String state) {
       return (CopyOfBuilder) super.state(state);
     }
+
+      @Override
+      public BuildStep image(String image) {
+          return super.image(image);
+      }
   }
   
 }

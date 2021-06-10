@@ -46,3 +46,10 @@ not in static way so we will deal with dynamic list of data
 
 ## AWS
 - connect app with aws amplify to make sign up and sign in page and to ensure the user can confirm his account after he create it 
+
+
+# lab 37 
+- add button to add task to make us add image for taskes 
+![image description](screenshots/16.jpg)
+- affter that add task 
+- ![image description](screenshots/17.jpg)
