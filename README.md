@@ -53,3 +53,15 @@ not in static way so we will deal with dynamic list of data
 ![image description](screenshots/16.jpg)
 - affter that add task 
 - ![image description](screenshots/17.jpg)
+
+# lab 38 
+- add notification on app by using firebase
+
+- ![image description](screenshots/20.png)
+
+# lab 41 
+- add ability to share file with my app from out side app
+
+# lab 42 
+- add location so app can get the user location and add it to task
+

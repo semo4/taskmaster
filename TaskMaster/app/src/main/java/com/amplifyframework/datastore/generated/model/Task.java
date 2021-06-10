@@ -252,10 +252,11 @@ public final class Task implements Model {
       return (CopyOfBuilder) super.state(state);
     }
 
-      @Override
-      public BuildStep image(String image) {
-          return super.image(image);
-      }
+     public CopyOfBuilder image(String image) {
+      return (CopyOfBuilder) super.image(image);
+    }
+
+
   }
   
 }
