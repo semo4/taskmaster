@@ -62,3 +62,6 @@ not in static way so we will deal with dynamic list of data
 # lab 41 
 - add ability to share file with my app from out side app
 
+# lab 42 
+- add location so app can get the user location and add it to task
+
