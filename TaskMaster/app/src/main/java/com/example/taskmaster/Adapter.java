@@ -11,6 +11,8 @@ import android.view.animation.AnimationUtils;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Holder>{
@@ -35,6 +37,7 @@ public class Adapter extends RecyclerView.Adapter<Holder>{
         holder.title.setText(models.get(position).getTitle());
         holder.body.setText(models.get(position).getBody());
         holder.state.setText(models.get(position).getState());
+        Glide.with(c).load(models.get(position).getImage()).into(holder.image);
 
         //animation to determain the display the view
 
@@ -50,6 +53,7 @@ public class Adapter extends RecyclerView.Adapter<Holder>{
                 String title = models.get(pos).getTitle();
                 String body = models.get(pos).getBody();
                 String state = models.get(pos).getState();
+                String image = models.get(pos).getImage();
 
 
 
@@ -58,6 +62,7 @@ public class Adapter extends RecyclerView.Adapter<Holder>{
                 intent.putExtra("title", title);
                 intent.putExtra("body", body);
                 intent.putExtra("state", state);
+                intent.putExtra("image", image);
 
                 c.startActivity(intent);
             }

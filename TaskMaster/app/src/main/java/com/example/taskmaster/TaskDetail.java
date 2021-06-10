@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -19,6 +22,7 @@ public class TaskDetail extends AppCompatActivity {
 
     TextView title, description, state;
     Button delete;
+    ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,16 +35,19 @@ public class TaskDetail extends AppCompatActivity {
         description =findViewById(R.id.description);
         state =findViewById(R.id.state);
         delete =findViewById(R.id.delete_task);
+        image =findViewById(R.id.image);
 
         Intent i = getIntent();
         int id = i.getIntExtra("id",1);
         String str_title = i.getStringExtra("title");
         String str_desc = i.getStringExtra("body");
         String str_state = i.getStringExtra("state");
+        String str_image = i.getStringExtra("image");
 
         title.setText(str_title);
         description.setText(str_desc);
         state.setText(str_state);
+        Picasso.get().load(str_image).into(image);
 
 
         delete.setOnClickListener(new View.OnClickListener() {

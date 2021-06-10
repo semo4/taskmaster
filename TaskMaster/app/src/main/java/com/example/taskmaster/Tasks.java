@@ -18,6 +18,9 @@ public class Tasks {
     @ColumnInfo(name = "state")
     String state;
 
+    @ColumnInfo(name = "image")
+    String image;
+
     public int getId() {
         return id;
     }
@@ -44,5 +47,13 @@ public class Tasks {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
